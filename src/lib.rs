@@ -42,20 +42,14 @@ macro_rules! make_jump_lcgX {
   };
 }
 
-#[cfg(feature = "os_random")]
-mod os_random;
-#[cfg(feature = "os_random")]
-pub use os_random::*;
-
 mod gen32;
 pub use gen32::*;
 
 mod pcg32;
 pub use pcg32::*;
 
-mod bounded_rand;
-pub use bounded_rand::*;
+// mod bounded_rand;
+// pub use bounded_rand::*;
 
-mod free_utils;
-
-pub mod games;
+mod pcg32_32;
+pub use pcg32_32::*;

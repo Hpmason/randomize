@@ -34,12 +34,12 @@ make_jump_lcgX!(jump_lcg32_32, u32);
 /// * The methods on this type are quite minimal. You're expected to use the
 ///   [`Gen32`] trait to provide most of the useful operations.
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-pub struct Pcg32x32 {
+pub struct RNG {
   state: u32,
   inc: u32,
 }
 
-impl Pcg32x32 {
+impl RNG {
   /// Seed a new generator.
   pub const fn seed(seed: u32, inc: u32) -> Self {
     let inc = (inc << 1) | 1;
@@ -69,27 +69,27 @@ impl Pcg32x32 {
   }
 }
 
-impl Default for Pcg32x32 {
+impl Default for RNG {
   fn default() -> Self {
-    const THE_DEFAULT: Pcg32x32 = Pcg32x32::seed(DEFAULT_PCG_SEED as _, DEFAULT_PCG_INC as _);
+    const THE_DEFAULT: RNG = RNG::seed(DEFAULT_PCG_SEED as _, DEFAULT_PCG_INC as _);
     THE_DEFAULT
   }
 }
 
-impl From<[u32; 2]> for Pcg32x32 {
+impl From<[u32; 2]> for RNG {
   fn from([state, inc]: [u32; 2]) -> Self {
     Self { state, inc }
   }
 }
 
-impl From<Pcg32x32> for [u32; 2] {
-  fn from(pcg: Pcg32x32) -> Self {
+impl From<RNG> for [u32; 2] {
+  fn from(pcg: RNG) -> Self {
     [pcg.state, pcg.inc]
   }
 }
 
-impl Gen32 for Pcg32x32 {
+impl Gen32 for RNG {
   fn next_u32(&mut self) -> u32 {
-    Pcg32x32::next_u32(self)
+    RNG::next_u32(self)
   }
 }

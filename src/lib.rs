@@ -51,5 +51,5 @@ pub use pcg32::*;
 // mod bounded_rand;
 // pub use bounded_rand::*;
 
-mod pcg32_32;
-pub use pcg32_32::*;
+mod rng;
+pub use rng::*;

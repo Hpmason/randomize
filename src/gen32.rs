@@ -31,36 +31,6 @@ pub trait Gen32 {
     h << 32 | l
   }
 
-  /// Returns an `f32` in the unsigned unit range, `[0, 1]`
-  ///
-  /// If you'd like `[0, 1)` then just use this and reroll in the (very
-  /// unlikely) case that you do get 1.0
-  #[inline]
-  fn next_f32_unit(&mut self) -> f32 {
-    crate::free_utils::ieee754_random_f32(self, true)
-  }
-
-  /// Returns an `f32` in the signed unit range, `[-1, 1]`
-  #[inline]
-  fn next_f32_signed_unit(&mut self) -> f32 {
-    crate::free_utils::ieee754_random_f32(self, false)
-  }
-
-  /// Returns an `f64` in the unsigned unit range, `[0, 1]`
-  ///
-  /// If you'd like `[0, 1)` then just use this and reroll in the (very
-  /// unlikely) case that you do get 1.0
-  #[inline]
-  fn next_f64_unit(&mut self) -> f64 {
-    crate::free_utils::ieee754_random_f64(self, true)
-  }
-
-  /// Returns an `f64` in the signed unit range, `[-1, 1]`
-  #[inline]
-  fn next_f64_signed_unit(&mut self) -> f64 {
-    crate::free_utils::ieee754_random_f64(self, false)
-  }
-
   /// Gives a value within `0 .. B`
   ///
   /// This is often more efficient than making a

@@ -50,17 +50,6 @@ impl Pcg32 {
     Self { state, inc }
   }
 
-  /// Seeds a new generator from the OS's randomness.
-  #[cfg(feature = "os_random")]
-  pub fn seed_from_os() -> Self {
-    let mut x = [0_u64; 2];
-    let _ = crate::fill_byte_buffer_from_os_random(unsafe {
-      core::slice::from_raw_parts_mut(x.as_mut_ptr().cast::<u8>(), 2 * core::mem::size_of::<u64>())
-    });
-    let [seed, inc] = x;
-    Self::seed(seed, inc)
-  }
-
   /// Gets the next 32-bits of output.
   #[inline]
   pub fn next_u32(&mut self) -> u32 {
